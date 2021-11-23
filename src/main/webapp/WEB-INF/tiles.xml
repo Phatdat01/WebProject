@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="default" template="/layout/default.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/layout/header.jsp" />
+		<put-attribute name="navigation"
+			value="/layout/navigation.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<definition name="formContent" extends="default">
+		<put-attribute name="title" value="Form content" />
+		<put-attribute name="body" value="/content/formcontent.jsp" />
+	</definition>
+	
+	<definition name="editProfile" extends="default">
+		<put-attribute name="title" value="Edit profile" />
+		<put-attribute name="body" value="/content/profile.jsp" />
+	</definition>
+	<definition name="viewContent" extends="default">
+		<put-attribute name="title" value="View content" />
+		<put-attribute name="body" value="/content/viewcontent.jsp" />
+	</definition>
+
+	<definition name="login" extends="default">
+		<put-attribute name="title" value="Login page" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="navigation" value="" />
+		<put-attribute name="body" value="/content/login.jsp" />
+	</definition>
+	
+	<definition name="register" extends="default">
+		<put-attribute name="title" value="Register page" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="navigation" value="" />
+		<put-attribute name="body" value="/content/register.jsp" />
+	</definition>
+
+</tiles-definitions>

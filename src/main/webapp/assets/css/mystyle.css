@@ -1,0 +1,29 @@
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --header-color: #f8f8f8;
+    --focus-color: #EEEEEE;
+    --border-color: #e0e0e0;
+    --text-color: #333;
+    --whiteSmoke-color:  #f5f5f5;
+    --gray-color:  #ccc;
+    --faux-guyabano-color: #f9f9f9;
+    --rose-pearl-color: #f33a58;
+    --height-header: 5.6rem;
+    --width-navigation: 28.2rem;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6em;
+}
+
+
