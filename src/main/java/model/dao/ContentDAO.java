@@ -27,8 +27,10 @@ public class ContentDAO {
 		try {
 			conn=ConnectMySQL.getMySQLConnection();
 			ps=conn.prepareStatement(select);
+			
 			Content author=new Content();
 			author.setId(authorId);
+			
 			ps.setInt(1,author.getId());
 			if(title!=null) {
 				ps.setString(2,title+"%");

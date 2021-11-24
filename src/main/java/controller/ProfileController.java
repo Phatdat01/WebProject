@@ -39,18 +39,23 @@ public class ProfileController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException   {
 		resp.setContentType("text/html;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
+		RequestDispatcher rd;
 
 		HttpSession session = req.getSession();
 		ProfileBean user2 = new ProfileBean();
 		user2 = (ProfileBean) session.getAttribute("userLogin");
-
+		if(user2 == null) {
+			rd = req.getRequestDispatcher("/view/login.jsp");
+			rd.forward(req, resp);
+		}
+		
 		String firstname = req.getParameter("firstname");
 		String lastname= req.getParameter("lastname");
 		String phone = req.getParameter("phone");
 		String description = req.getParameter("description");
 		String email= user2.getEmail();
 		
-		System.out.println(firstname);
+		
 
 		ProfileBean user = new ProfileBean();
 		user.setFirstname(firstname);
@@ -60,13 +65,11 @@ public class ProfileController extends HttpServlet {
 		user.setPhone(phone);
 
 
-
-
 		boolean flag = false;
 
 		ProfileBean objResigter = new ProfileBean();
 		
-		RequestDispatcher rd;
+		
 		if(user.getFirstname() == null || user.getPhone() == null || user.getDescription() == null) {
 			LoginBean userLogin = new LoginBean();
 			userLogin.setEmail(user.getEmail());

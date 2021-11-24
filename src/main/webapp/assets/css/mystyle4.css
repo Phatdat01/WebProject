@@ -160,5 +160,4 @@
 .view-content {
    flex: 1;
    height: calc(100vh - var(height-header));
-   overflow-y: hidden;
 }

@@ -111,8 +111,7 @@
     width: 11.2rem;
     box-shadow: 0 0 3px var(--gray-color);
     border-width: 0;
-    background-color: #5cb85c;
-    color: #fff;
+   
     cursor: pointer;
 }
 .btn-submit{

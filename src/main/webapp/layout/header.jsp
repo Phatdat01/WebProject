@@ -31,7 +31,27 @@
 			</a>
 		</div>
 	</div>
+<script>
+var accountUser = document.querySelector('.header__account');
 
+var app = document.querySelector('.main-app');
+
+
+	accountUser.onclick = (event) => {
+		event.stopPropagation();
+		accountUser.style.backgroundColor = "#EEEEEE";
+		accountUser.classList.add('header__account--appear');
+
+	};
+
+
+
+	app.onclick = () => {
+		accountUser.style.backgroundColor = "";
+		accountUser.classList.remove('header__account--appear');
+	};
+
+</script>
 </body>
 
 </html>

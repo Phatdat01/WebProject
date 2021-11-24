@@ -11,6 +11,7 @@
     --rose-pearl-color: #f33a58;
     --height-header: 5.6rem;
     --width-navigation: 28.2rem;
+    --btn-color: #5cb85c;
 }
 
 * {
@@ -25,5 +26,8 @@ body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6em;
 }
-
+.btn{
+	 background-color: var(--btn-color);
+     color: var(--white-color);
+}
 

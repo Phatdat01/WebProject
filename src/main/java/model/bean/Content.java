@@ -79,6 +79,19 @@ public class Content {
 			e.printStackTrace();
 		}
 	}
+	public Content(int id, String title, String brief, String content, String createdate, String updatetime,
+			SimpleDateFormat myFormat, SimpleDateFormat system, int authorId) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.brief = brief;
+		this.content = content;
+		this.createdate = createdate;
+		this.updatetime = updatetime;
+		this.myFormat = myFormat;
+		this.system = system;
+		this.authorId = authorId;
+	}
 	public Content() {
 		super();
 	}

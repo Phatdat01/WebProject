@@ -44,7 +44,8 @@ th,td{
     padding: 5px 10px;
 }
 td{
-	padding: 1.5rem;
+	
+	padding: 0.4rem 1rem;
 	line-height: 2rem;
 }
 tr:nth-child(2n){
@@ -63,4 +64,29 @@ tr:nth-child(2n){
 
 .tb-action{
 	width:15%;
+}
+.tb-id{
+    text-align:center;
+}
+.page{
+	font-weight: bold;
+	cursor:pointer;
+	text-align:center;
+	border:1px solid blue;
+	font-size:15px;
+	text-decoration: none;
+	display:inline;
+	padding-block:5px;
+	padding-inline:10px;
+	border-radius:2px;
+	color:black;
+}
+
+.page:hover{
+	background:#b1d4ea;
+}
+
+#active{
+	background:rgb(0, 128, 192);
+	color:white;
 }

@@ -13,17 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import model.bean.Content;
+import model.bean.ProfileBean;
 import model.dao.ContentDAO;
 
-/*
- * Servlet implementation class ViewContent
+/**
+ * Servlet implementation class search
  */
-
 @WebServlet("/content")
-@RequestMapping("/content")
 public class ViewContent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -37,7 +35,7 @@ public class ViewContent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	HttpSession session = request.getSession();
-    	if(session.getAttribute("email") != null) {
+    	if(session.getAttribute("userLogin") != null) {
     		doPost(request, response);
     	}
     	else {
@@ -49,8 +47,10 @@ public class ViewContent extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		
 		String title = request.getParameter("search");
 		String currentPage=request.getParameter("currentPage");
+		
 		if(title!=null) {
 			title.trim();
 			Cookie search = new Cookie("search",title);
@@ -68,9 +68,18 @@ public class ViewContent extends HttpServlet {
 		}
 		ContentDAO ctd=new ContentDAO();
 		List<Content> lst = null;
+		
 		HttpSession session = request.getSession();
-		int authorId= 2;
+		ProfileBean user2 = new ProfileBean();
+		user2 = (ProfileBean)session.getAttribute("userLogin");
+		if(user2 == null) {
+			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+    	}
+    
+		int authorId=user2.getId();
+
 		int idcontent=0;
+		
 		if(currentPage == null) {
 			currentPage="1";
 		}
@@ -81,12 +90,18 @@ public class ViewContent extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		int page=ctd.getMaxNumPage(title,authorId);
+		int numPage=page/10;
+		if(page%10!=0) {
+			numPage++;
+		}
+		request.setAttribute("numPage",numPage);
 		request.setAttribute("tbcontents",lst);
 		request.setAttribute("current",currentPage);
+		
 		RequestDispatcher rd =request.getRequestDispatcher("/view/viewcontent.jsp");
 		rd.forward(request,response);
 	}
-	
-	
+
 
 }
