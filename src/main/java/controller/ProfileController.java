@@ -57,20 +57,23 @@ public class ProfileController extends HttpServlet {
 		
 		
 
-		ProfileBean user = new ProfileBean();
-		user.setFirstname(firstname);
-		user.setLastname(lastname);
-		user.setDescription(description);
-		user.setEmail(email);
-		user.setPhone(phone);
+		
 
 
 		boolean flag = false;
 
 		ProfileBean objResigter = new ProfileBean();
 		
+		ProfileBean user = new ProfileBean();
+		user.setFirstname(firstname);
+		user.setLastname(lastname);
+		user.setDescription(description);
+		user.setEmail(email);
+		user.setPhone(phone);
 		
 		if(user.getFirstname() == null || user.getPhone() == null || user.getDescription() == null) {
+			
+			
 			LoginBean userLogin = new LoginBean();
 			userLogin.setEmail(user.getEmail());
 
@@ -79,7 +82,14 @@ public class ProfileController extends HttpServlet {
 			req.setAttribute("objRegister", objResigter);
 			rd = req.getRequestDispatcher("/view/profile.jsp");
 			rd.forward(req, resp);
-		}else {				
+		}else {	
+			ProfileBean user3 = new ProfileBean();
+			user3.setFirstname(firstname.trim());
+			user3.setLastname(lastname.trim());
+			user3.setDescription(description.trim());
+			user3.setEmail(email.trim());
+			user3.setPhone(phone.trim());
+			
 			try {
 				flag = ProfileDAO.insertProfile(user);
 				

@@ -42,71 +42,37 @@
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script src="<c:url value=" /assets/js/main.js " />">
-                    < script >
+	<script src="<c:url value="/assets/js/main.js" />">
 
-                        var accountUser = document.querySelector('.header__account');
-
-                    var app = document.querySelector('.main-app');
-                    accountUser.onclick = (event) => {
-                        event.stopPropagation();
-                        accountUser.style.backgroundColor = "#EEEEEE";
-                        accountUser.classList.add('header__account--appear');
-
-                    };
-                    app.onclick = () => {
-                        accountUser.style.backgroundColor = "";
-                        accountUser.classList.remove('header__account--appear');
-                    };
-
-                    $("body").on("click", ".page", function() {
-                        var numPage = $(this).text();
-                        $.ajax({
-                            url: '/DoAnJava/content',
-                            type: 'POST',
-                            data: {
-                                currentPage: numPage
-                            },
-                            suscess: function(data) {
-                                alert(data);
-                            }
-                        });
-                    })
-                </script>
-	<script>
-                    /*
-                    var viewContentBar = document.querySelector('.navbar__content');
-                    var viewContent = document.querySelector('.view-content');
-
-
-                    viewContentBar.onclick = function (e) {
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+                var viewContentBar = document.querySelector('.navbar__content');
+                var viewContent = document.querySelector('.view-content');
+                viewContentBar.onclick = function(e) {
                     viewContent.innerHTML = 'Loading';
                     viewContent.style.fontSize = '24px';
                     viewContent.style.margin = '40px';
                     viewContent.style.lineHeight = '26px';
-                    	e.preventDefault();
-                        var serviceURL = '/DoAnJava/search';
-                        var model = null;
-                        
-                        setTimeout(function(){
-                        	$.ajax({
-                                type: "GET",
-                                url: "",
-                                data: JSON.stringify(model),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: 'html',
-                                success: function (data) {
-                                  $('.view-content').load(serviceURL);
-                                },
-                                error: function (data, errorThrown) {
-                                    alert(errorThrown);
-                                }
-                            });
-                        	}, 0);
-                        
-                       
-                    }*/
-                </script>
+                    e.preventDefault();
+                    var serviceURL = '/ProjectJava/content';
+                    var model = null;
+                    setTimeout(function() {
+                        $.ajax({
+                            type: "GET",
+                            url: serviceURL,
+                            data: JSON.stringify(model),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: 'html',
+                            success: function(data) {
+                                $('.main-app').load(serviceURL);
+                            },
+                            error: function(data, errorThrown) {
+                                alert(errorThrown);
+                            }
+                        });
+                    }, 5000);
+                }
+            </script>
 
 </body>
 

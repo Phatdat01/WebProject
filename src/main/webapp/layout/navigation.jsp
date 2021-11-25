@@ -25,5 +25,5 @@
                 function clearSearch() {
                     document.cookie = "search=;0,0;";
                 }
-            </script>
+     </script>
 </div>

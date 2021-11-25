@@ -69,7 +69,7 @@
 				<span class="form__message"></span>
 			</div>
 			<div class="form__name">
-				<button type="submit" class="btn btn-submit">Submit Button</button>
+				<button type="submit" onclick="clearSearch()" class="btn btn-submit">Submit Button</button>
 				<button type="reset" class="btn btn-reset">Reset Button</button>
 			</div>
 
@@ -80,6 +80,7 @@
 
 
 	<script>
+		
 		const formNameSelector = '.form__name';
 		const formMessage = '.form__message';
 		const invalidForm = '.app__validate';

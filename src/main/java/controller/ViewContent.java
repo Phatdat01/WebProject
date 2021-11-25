@@ -49,7 +49,7 @@ public class ViewContent extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String title = request.getParameter("search");
-		String currentPage=request.getParameter("currentPage");
+		String currentPage=request.getParameter("current");
 		
 		if(title!=null) {
 			title.trim();

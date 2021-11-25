@@ -17,14 +17,14 @@ import model.dao.ContentDAO;
 @WebServlet("/deletecontent")
 public class DeleteContent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public DeleteContent() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DeleteContent() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -36,6 +36,5 @@ public class DeleteContent extends HttpServlet {
 		delete.deletecontent(id);
 		RequestDispatcher rd =request.getRequestDispatcher("/content");
 		rd.forward(request,response);
-
 	}
 }

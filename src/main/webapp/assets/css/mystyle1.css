@@ -1,3 +1,7 @@
+.page-btn{
+	min-width: 6rem;
+	
+}
 .view-content__body{
 	margin: 0 1.8rem 0 3rem;
 }
@@ -45,7 +49,7 @@ th,td{
 }
 td{
 	
-	padding: 0.4rem 1rem;
+	padding: 1.4rem 1rem;
 	line-height: 2rem;
 }
 tr:nth-child(2n){
@@ -59,7 +63,7 @@ tr:nth-child(2n){
     width: 20%;
 }
 .tb-cd{
-    width: 12%;
+    width: 10%;
 }
 
 .tb-action{
@@ -72,21 +76,16 @@ tr:nth-child(2n){
 	font-weight: bold;
 	cursor:pointer;
 	text-align:center;
-	border:1px solid blue;
+	border:1px solid var(--border-color);
 	font-size:15px;
 	text-decoration: none;
 	display:inline;
 	padding-block:5px;
 	padding-inline:10px;
-	border-radius:2px;
-	color:black;
+	border-radius:3px;
+	color:var(--text-color);
+	min-width: 10rem;
+	margin-right: 1rem;
+	background-color: var(--btn-color);
 }
 
-.page:hover{
-	background:#b1d4ea;
-}
-
-#active{
-	background:rgb(0, 128, 192);
-	color:white;
-}

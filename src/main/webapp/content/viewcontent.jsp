@@ -7,17 +7,17 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link href="<c:url value="/assets/css/mystyle1.css" />" rel="stylesheet">
-
+<link href="<c:url value="/assets/css/mystyle.css" />" rel="stylesheet">
+<style>
+	 <%@ include file="/assets/css/mystyle1.css" %>
+</style>
 </head>
 <body>
-
 	<div class="view-content__body">
 		<h1 class="view-content__body-title">View Content</h1>
 		<div class="view-content__wrap">
@@ -45,93 +45,113 @@
 					</c:forEach>
 				</span>
 			</table>
-			<div>
-				<c:forEach begin="1" end="${numPage}" var="i">
-					<a class="page" data-idContent="<c:out value='${i}'/>"
-						id="${current==i?"active":" "}" > <c:out value='${i}' />
-					</a>
-				</c:forEach>
-				<button>previous</button>
+			<div class="changePage">
+				<p id="numPage" style="display: none">
+					<c:out value="${numPage}" />
+				</p>
+				<p id="current" style="display: none">
+					<c:out value="${current}" />
+				</p>
+				<button class="page page-btn" id="subtract">Previous</button>
+				<button class="page page-btn" id="add">Next</button>
 			</div>
-			
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-			
-			</script>
-			<script>
-			
-            	var deletebtn = document.querySelector('.del');
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
 				
-                	$("body").on("click", ".page", function(e) {
-                    	
-                		e.preventDefault();
-                		
-                        	var numPage = $(this).text().trim();
-                        	
-                        	
-				          var serviceURL = '/ProjectJava/content?currentPage=' + numPage;
-							var model = null;
+				var numPage=parseInt(document.getElementById("numPage").innerHTML);
+				function changeBtn(){
+					var currentPage=parseInt(document.getElementById("current").innerHTML);
+					
+					var previousBtn = document.getElementById("subtract");
+					var nextBtn = document.getElementById("add");
+					
+					if(currentPage == 1){
+						previousBtn.style.display= 'none';
+					}else{
+						previousBtn.style.display= 'inline-block';
+					}
+					
+					if(currentPage+1 > numPage){
+						nextBtn.style.display= 'none';
+					}else{
+						nextBtn.style.display= 'inline-block';
+					}
+				}
+				
+			
+				$("body").on("click", "#subtract", function() {
+					var current=parseInt(document.getElementById("current").innerHTML);	
+					current-=1;					
+					
+					var serviceURL = '/ProjectJava/content?current=' +current;
+					$.ajax({
+						type: "GET",
+						url: serviceURL,
+						success: function(data) {	
+							$('.main-app').html(data);							
+							changeBtn();
+						},
+						error: function(data, errorThrown) {
+							alert(errorThrown);
+						}
+					})
+				})
+				
+				$("body").on("click", "#add", function() {
+					var current=parseInt(document.getElementById("current").innerHTML);
+					
+					current+=1;
+					
+					var serviceURL = '/ProjectJava/content?current=' +current;
+					$.ajax({
+						type: "GET",
+						url: serviceURL,
+						success: function(data) {
+							
+							$('.main-app').html(data);
+							changeBtn();
+							
+						},
+						error: function(data, errorThrown) {
+							alert(errorThrown);
+						}
+					})
+				})
+				
+				changeBtn();
+ 
+                function del(id) {
+                	var current=parseInt(document.getElementById("current").innerHTML);
+                	alert(current)
+                	var confirm=confirmBox();
+                    if (confirm){
+						var serviceURL = '/ProjectJava/deletecontent';
 						$.ajax({
-							type: "GET",
+							type: 'POST',
 							url: serviceURL,
-							data: JSON.stringify(model),
-							contentType: "application/json; charset=utf-8",
-							dataType: 'html',
+							data:{
+								idc:id,
+								current: current
+							},
 							success: function(data) {
 								
 								$('.main-app').html(data);
-							},
-							error: function(data, errorThrown) {
-								alert(errorThrown);
-							}
-						});
-                        	
-                            
-                	})
-
-               
-               
-                
-                function del(eeee) {
-					var confirm = confirmBox();
-                    if (confirm) {
-						var serviceURL = '/ProjectJava/deletecontent?id=' +eeee;
-						var model = null;
-						$.ajax({
-							type: "GET",
-							url: serviceURL,
-							data: JSON.stringify(model),
-							contentType: "application/json; charset=utf-8",
-							dataType: 'html',
-							success: function(data) {
-								$('.view-content').load('/ProjectJava/content');
+								
 							},
 							error: function(data, errorThrown) {
 								alert(errorThrown)
 							}
-							})
-						}
+						})
                     }
-				
-// 				function del(idc) {
-//                 	var confirm = confirmBox();
-//                     if (confirm) {
-//                     	$.ajax({
-//                         	url: '/ProjectJava/deletecontent',
-//                             type: 'POST',
-//                             data: {
-//                             	idc: idc
-//                             }
-//                         });
-//                     }
-//                  }
-
+                 }
+                
                  function confirmBox() {
-                 	var result = confirm("Xoá thật à?");
+                 	var result = confirm("Bạn muốn xóa thông tin này?");
                     return result;
                  }
-        	</script>
+		</script>
 		</div>
 	</div>
 </body>
-
 </html>

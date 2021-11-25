@@ -61,12 +61,12 @@ public class RegisterController extends HttpServlet{
 
 				if(flag) {
 					req.setAttribute("email", user.getEmail());
-					req.setAttribute("msg", "Đăng kí thành công");
-					rd = req.getRequestDispatcher("/view/profile.jsp");
+					//req.setAttribute("msg", "Đăng ký thành công");
+					rd = req.getRequestDispatcher("/view/login.jsp");
 					rd.forward(req, resp);
 				}
 				else {
-					req.setAttribute("msg", "Không đăng kí được");
+					req.setAttribute("msg", "Không đăng ký được");
 					rd = req.getRequestDispatcher("/view/register.jsp");
 					rd.forward(req, resp);
 				}
@@ -74,8 +74,8 @@ public class RegisterController extends HttpServlet{
 			}
 
 		}
-
-
 	}
-
 }
+
+
+

@@ -1,30 +1,4 @@
 
-var btnDelContentArr = document.querySelectorAll('.btn-delete__content');
-
-Array.from(btnDelContentArr).forEach((deletebtn, index) => {
-	deletebtn.onclick = function(e) {
-		e.preventDefault();
-		var delContent = e.target;
-		var id = delContent.dataset.iddel;
-		var serviceURL = '/ProjectJava/deletecontent?id=' + id;
-		var model = null;
-		$.ajax({
-			type: "GET",
-			url: serviceURL,
-			data: JSON.stringify(model),
-			contentType: "application/json; charset=utf-8",
-			dataType: 'html',
-			success: function(data) {
-				$('.view-content').load('/ProjectJava/search');
-			},
-			error: function(data, errorThrown) {
-				alert(errorThrown);
-			}
-		});
-	}
-});
-
-
 function Validator(formSelector, booleanSubmit = true) {
 	const _this = this;
 
@@ -203,44 +177,44 @@ function Validator(formSelector, booleanSubmit = true) {
 				var btnSubmit = document.querySelector('.btn-submit-js')
 				var form = document.querySelector('#form-1')
 
+//////////////////////////
+					var viewContent = document.querySelector('.view-content');
 
+    				if (btnSubmit) {
+    					btnSubmit.onclick = function(e) {
 
+    						var firstName = form.querySelector('[name="firstname"]:not(disabled)').value;
+    						var lastName = form.querySelector('[name="lastname"]:not(disabled)').value;
+    						var email = form.querySelector('[name="email"]:not(disabled)').value;
+    						var phone = form.querySelector('[name="phone"]:not(disabled)').value;
+    						var descr = form.querySelector('[name="description"]:not(disabled)').value;
+    						var model = {
+    							firstname: firstName.trim(),
+    							lastname: lastName.trim(),
+    							email: email.trim(),
+    							phone: phone.trim(),
+    							description: descr.trim()
+    						};
+    							
+    							
+    						$.ajax({
+    							url: '/ProjectJava/profilecontroller',
+    							type: 'POST',
+    							data: model,
+    							success: function(data) {
 
-				var viewContent = document.querySelector('.view-content');
+    								$('.main-app').load('/ProjectJava/profilecontroller');
 
-				if (btnSubmit) {
-					btnSubmit.onclick = function(e) {
+    								alert("Cập nhật thành công");
 
-						var firstName = form.querySelector('[name="firstname"]:not(disabled)').value;
-						var lastName = form.querySelector('[name="lastname"]:not(disabled)').value;
-						var email = form.querySelector('[name="email"]:not(disabled)').value;
-						var phone = form.querySelector('[name="phone"]:not(disabled)').value;
-						var descr = form.querySelector('[name="description"]:not(disabled)').value;
-						var model = {
-							firstname: firstName,
-							lastname: lastName,
-							email: email,
-							phone: phone,
-							description: descr
-						};
+    							},
+    							error: function(data, errorThrown) {
+    								alert(errorThrown);
+    							}
+    						});
 
-						$.ajax({
-							url: '/ProjectJava/profilecontroller',
-							type: 'POST',
-							data: model,
-							success: function(data) {
+    					}
 
-								$('.main-app').load('/ProjectJava/profilecontroller');
-
-								alert("Cập nhật thành công");
-
-							},
-							error: function(data, errorThrown) {
-								alert(errorThrown);
-							}
-						});
-
-					}
 
 				}
 				if(booleanSubmit){

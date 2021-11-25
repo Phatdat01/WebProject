@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.bean.EncryptDecrypt;
 import model.bean.LoginBean;
 import model.bean.ProfileBean;
 import model.dao.LoginDAO;
@@ -45,7 +46,9 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("userLogin", checkLogin);
 				
 				if(remember) {
-					Cookie ckEmail = new Cookie("email", checkLogin.getEmail());
+					String emailUser = EncryptDecrypt.encrypt( checkLogin.getEmail());
+					
+					Cookie ckEmail = new Cookie("email", emailUser);
 					
 					ckEmail.setMaxAge(60*60*24);
 	
@@ -107,6 +110,8 @@ public class LoginController extends HttpServlet {
 		else {
 			if(action.equals("logout")) {
 				session.removeAttribute("email");
+				session.removeAttribute("userLogin");
+				session.removeAttribute("register");
 				Cookie [] cookies = req.getCookies();
 				
 				for(Cookie ck : cookies) {
@@ -116,6 +121,7 @@ public class LoginController extends HttpServlet {
 					}
 					
 				}
+				session.invalidate();
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/view/login.jsp");
 				rd.forward(req, resp);
@@ -132,7 +138,7 @@ public class LoginController extends HttpServlet {
 			String email = "";
 			for(Cookie ck : cookies) {
 				if(ck.getName().equals("email")) {
-					email = ck.getValue();
+					email = EncryptDecrypt.decrypt(ck.getValue());					
 				}
 				
 			}

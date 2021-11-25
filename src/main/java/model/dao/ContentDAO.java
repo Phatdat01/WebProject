@@ -33,7 +33,7 @@ public class ContentDAO {
 			
 			ps.setInt(1,author.getId());
 			if(title!=null) {
-				ps.setString(2,title+"%");
+				ps.setString(2,"%"+title+"%");
 				ps.setInt(3,idcontent);
 			}
 			else {
