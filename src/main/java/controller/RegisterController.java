@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.bean.EncryptDecrypt;
 import model.bean.RegisterBean;
 import model.dao.RegisterDAO;
 
@@ -26,7 +27,7 @@ public class RegisterController extends HttpServlet{
 
 		String username = req.getParameter("username");
 		String email = req.getParameter("email");
-		String password = req.getParameter("password");
+		String password = EncryptDecrypt.encrypt(req.getParameter("password"));
 
 		RegisterBean user = new RegisterBean(username, email, password);
 		HttpSession session = req.getSession();

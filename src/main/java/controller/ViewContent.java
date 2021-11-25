@@ -73,7 +73,7 @@ public class ViewContent extends HttpServlet {
 		ProfileBean user2 = new ProfileBean();
 		user2 = (ProfileBean)session.getAttribute("userLogin");
 		if(user2 == null) {
-			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/logincontroller").forward(request, response);
     	}
     
 		int authorId=user2.getId();

@@ -123,7 +123,7 @@
  
                 function del(id) {
                 	var current=parseInt(document.getElementById("current").innerHTML);
-                	alert(current)
+          
                 	var confirm=confirmBox();
                     if (confirm){
 						var serviceURL = '/ProjectJava/deletecontent';

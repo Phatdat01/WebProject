@@ -177,7 +177,7 @@ function Validator(formSelector, booleanSubmit = true) {
 				var btnSubmit = document.querySelector('.btn-submit-js')
 				var form = document.querySelector('#form-1')
 
-//////////////////////////
+
 					var viewContent = document.querySelector('.view-content');
 
     				if (btnSubmit) {

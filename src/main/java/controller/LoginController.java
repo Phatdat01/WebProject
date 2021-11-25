@@ -33,12 +33,13 @@ public class LoginController extends HttpServlet {
 		if(action == null) {
 			String email = req.getParameter("email").trim();
 			String pass = req.getParameter("password").trim();
+			pass = EncryptDecrypt.encrypt(pass);
 			boolean remember = req.getParameter("remember") != null;
 
 			LoginBean user = new LoginBean();
 			user.setEmail(email);
 			user.setPassword(pass);
-
+			
 			ProfileBean checkLogin = LoginDAO.checkLogin(user);
 			
 			if(checkLogin.getEmail()!= null) {
@@ -72,9 +73,6 @@ public class LoginController extends HttpServlet {
 				rd.forward(req, resp);
 			}
 		}
-		
-
-
 
 
 	}
@@ -92,10 +90,10 @@ public class LoginController extends HttpServlet {
 			}
 			else {
 				ProfileBean person = LoginDAO.checkLogin(account);
-				if(person != null) {
+				if(person.getEmail() != null) {
 					// chuyển sang trang đăng nhập thành công
 					session.setAttribute("email", account.getEmail());
-					session.setAttribute("register", person);
+					session.setAttribute("userLogin", person);
 					
 					RequestDispatcher rd = req.getRequestDispatcher("/view/profile.jsp");
 					rd.forward(req, resp);
@@ -119,6 +117,10 @@ public class LoginController extends HttpServlet {
 						ck.setMaxAge(0);
 						resp.addCookie(ck);
 					}
+					if(ck.getName().equals("search")) {
+						ck.setMaxAge(0);
+						resp.addCookie(ck);
+					}
 					
 				}
 				session.invalidate();
@@ -128,6 +130,7 @@ public class LoginController extends HttpServlet {
 			}
 		}
 	}
+	
 	private LoginBean checkCookie (HttpServletRequest req) {
 		Cookie [] cookies = req.getCookies();
 		LoginBean account = null ;

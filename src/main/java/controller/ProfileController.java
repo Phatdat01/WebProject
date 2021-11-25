@@ -39,13 +39,16 @@ public class ProfileController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException   {
 		resp.setContentType("text/html;charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
+		
 		RequestDispatcher rd;
 
 		HttpSession session = req.getSession();
 		ProfileBean user2 = new ProfileBean();
+		
 		user2 = (ProfileBean) session.getAttribute("userLogin");
+		
 		if(user2 == null) {
-			rd = req.getRequestDispatcher("/view/login.jsp");
+			rd = req.getRequestDispatcher("/logincontroller");
 			rd.forward(req, resp);
 		}
 		
@@ -99,7 +102,7 @@ public class ProfileController extends HttpServlet {
 
 				}
 				else {
-					rd = req.getRequestDispatcher("/view/register.jsp");
+					rd = req.getRequestDispatcher("/view/profile.jsp");
 					rd.forward(req, resp);
 				}
 			} catch (ClassNotFoundException e) {
