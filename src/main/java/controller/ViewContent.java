@@ -39,7 +39,7 @@ public class ViewContent extends HttpServlet {
     		doPost(request, response);
     	}
     	else {
-    		request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+    		response.sendRedirect("/ProjectJava/logincontroller");
     	}
     }
     
@@ -73,7 +73,7 @@ public class ViewContent extends HttpServlet {
 		ProfileBean user2 = new ProfileBean();
 		user2 = (ProfileBean)session.getAttribute("userLogin");
 		if(user2 == null) {
-			request.getRequestDispatcher("/logincontroller").forward(request, response);
+			response.sendRedirect("/logincontroller");
     	}
     
 		int authorId=user2.getId();

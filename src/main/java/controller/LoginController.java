@@ -85,10 +85,6 @@ public class LoginController extends HttpServlet {
 			LoginBean account = checkCookie(req);
 			
 			if(account != null) {
-				RequestDispatcher rd = req.getRequestDispatcher("/view/login.jsp");
-				rd.forward(req, resp);
-			}
-			else {
 				ProfileBean person = LoginDAO.checkLogin(account);
 				if(person.getEmail() != null) {
 					// chuyển sang trang đăng nhập thành công
@@ -103,6 +99,12 @@ public class LoginController extends HttpServlet {
 					RequestDispatcher rd = req.getRequestDispatcher("/view/login.jsp");
 					rd.forward(req, resp);
 				}
+				
+				
+			}
+			else {
+				RequestDispatcher rd = req.getRequestDispatcher("/view/login.jsp");
+				rd.forward(req, resp);
 			}
 		}
 		else {
@@ -125,8 +127,8 @@ public class LoginController extends HttpServlet {
 				}
 				session.invalidate();
 				
-				RequestDispatcher rd = req.getRequestDispatcher("/view/login.jsp");
-				rd.forward(req, resp);
+				resp.sendRedirect("/ProjectJava/view/login.jsp");
+				
 			}
 		}
 	}
@@ -141,13 +143,13 @@ public class LoginController extends HttpServlet {
 			String email = "";
 			for(Cookie ck : cookies) {
 				if(ck.getName().equals("email")) {
-					email = EncryptDecrypt.decrypt(ck.getValue());					
+					email = ck.getValue();		
 				}
 				
 			}
 			if(!email.isEmpty()) {
 				account = new LoginBean();
-				account.setEmail(email);
+				account.setEmail(EncryptDecrypt.decrypt(email));
 			}
 
 		}
